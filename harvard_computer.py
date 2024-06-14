@@ -38,7 +38,8 @@ data = [
     (1, 1, 0, 0),
     (1, 1, 0, 1),
     (1, 0, 0, 0),
+    (1, 0, 0, 0),
 ]
 code = [0, 0, 0, 0, 0, 0, 1]
 
-print("실행 결과: ", COMPUTER(code, data + [(1, 0, 0, 0)]))
+print("실행 결과: ", COMPUTER(code, data))
