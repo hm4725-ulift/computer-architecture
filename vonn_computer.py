@@ -16,21 +16,21 @@ def COMPUTER(data: List[WORD]) -> WORD:
     def FETCH(data: List[WORD], pc: int) -> WORD:
         return data[pc]
 
-    def DECODE(instr: WORD):
-        op = instr[3]
-        addr = instr[0] + 2 * instr[1] + 4 * instr[2] + 8
+    def DECODE(instruction: WORD):
+        op = instruction[3]
+        addr = instruction[0] + 2 * instruction[1] + 4 * instruction[2] + 8
         return op, addr
 
-    def INSTRUCTION(op: bool, a: WORD, b: WORD) -> WORD:
+    def EXECUTE(op: bool, a: WORD, b: WORD) -> WORD:
         s0 = AND4(NOT4((op, op, op, op)), ADD4(a, b))
         s1 = AND4((op, op, op, op), SUB4(a, b))
         return ADD4(s0, s1)
 
     s = (0, 0, 0, 0)
     for pc in range(8):
-        instr = FETCH(data, pc)
-        op, addr = DECODE(instr)
-        s = INSTRUCTION(op, s, data[addr])
+        instruction = FETCH(data, pc)
+        op, addr = DECODE(instruction)
+        s = EXECUTE(op, s, data[addr])
     return s
 
 
